@@ -59,7 +59,6 @@
     var services = $("#services"), select = $("#f-tipo");
     (site.servicios || []).forEach(function (s, i) {
       var card = el("article", "service");
-      card.appendChild(el("span", "service-n", "S/" + String(i + 1).padStart(2, "0")));
       var body = el("div");
       body.appendChild(el("h3", null, s.titulo));
       body.appendChild(el("p", null, s.descripcion));
