@@ -284,52 +284,6 @@
     document.addEventListener("visibilitychange", function () { if (!document.hidden && !reduceMotion) requestAnimationFrame(draw); });
   }
 
-  // Columnas de luz roja en Contacto: suben desde abajo cuando la sección aparece
-  (function () {
-  var bars = $("#bars");
-  if (bars && bars.getContext) {
-    var canvas = bars, ctx = bars.getContext("2d"), W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2), t0 = 0, running = false;
-    var seeds = [];
-    for (var k = 0; k < 24; k++) seeds.push({ h: 0.12 + ((k * 37) % 11) / 11 * 0.22, a: 0.45 + ((k * 53) % 7) / 7 * 0.55, ph: k * 1.7 });
-    function size() {
-      var r = canvas.getBoundingClientRect(); W = r.width; H = r.height;
-      canvas.width = W * dpr; canvas.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-    function draw(now) {
-      if (!t0) t0 = now;
-      var t = (now - t0) / 1000;
-      ctx.clearRect(0, 0, W, H);
-      var n = Math.max(5, Math.min(14, Math.round(W / 115))), cw = W / n, gap = 3;
-      for (var i = 0; i < n; i++) {
-        var sd = seeds[i], x = i * cw;
-        var rise = reduceMotion ? 1 : 1 - Math.pow(1 - Math.min(1, Math.max(0, t * 0.9 - i * 0.06)), 3);
-        var h = H * (sd.h + Math.sin(t * 0.45 + sd.ph) * 0.03) * rise;
-        var top = H - h;
-        var g = ctx.createLinearGradient(0, H, 0, top);
-        g.addColorStop(0, "rgba(225,37,27," + (0.38 * sd.a) + ")");
-        g.addColorStop(0.45, "rgba(150,18,14," + (0.14 * sd.a) + ")");
-        g.addColorStop(1, "rgba(225,37,27,0)");
-        ctx.fillStyle = g;
-        ctx.fillRect(x + gap / 2, top, cw - gap, h);
-        // filo de luz en el borde de cada columna
-        var e = ctx.createLinearGradient(0, H, 0, top);
-        e.addColorStop(0, "rgba(255,90,70," + (0.25 * sd.a) + ")");
-        e.addColorStop(1, "rgba(255,90,70,0)");
-        ctx.fillStyle = e;
-        ctx.fillRect(x + gap / 2, top, 1, h);
-      }
-      if (running && !reduceMotion && !document.hidden) requestAnimationFrame(draw);
-    }
-    size();
-    new IntersectionObserver(function (es) {
-      var was = running; running = es[0].isIntersecting;
-      if (running && !was) requestAnimationFrame(draw);
-    }, { threshold: 0.15 }).observe(bars.parentNode);
-    window.addEventListener("resize", function () { size(); requestAnimationFrame(draw); });
-    document.addEventListener("visibilitychange", function () { if (!document.hidden && running && !reduceMotion) requestAnimationFrame(draw); });
-  }
-  })();
-
   // Glitch en el nombre: cada pocos segundos y al pasar el mouse
   var heroName = $("#heroName");
   function glitch() {

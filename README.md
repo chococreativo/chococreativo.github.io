@@ -1,4 +1,4 @@
-# Edgar Altamar M. · Choco Creativo
+# Edgar Altamar M. · ChocoCreativo
 
 Portafolio de Edgar Altamar M., diseñador gráfico. Publicado en https://chococreativo.github.io
 
