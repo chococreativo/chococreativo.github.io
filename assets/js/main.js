@@ -248,10 +248,12 @@
     });
   }
 
-  // Ondas de luz roja en la portada
+  // Columnas de luz roja en la portada: suben desde abajo a distintas alturas
   var canvas = $("#waves");
   if (canvas && canvas.getContext) {
     var ctx = canvas.getContext("2d"), W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2), t0 = performance.now();
+    var seeds = [];
+    for (var k = 0; k < 24; k++) seeds.push({ h: 0.3 + ((k * 37) % 11) / 11 * 0.45, a: 0.45 + ((k * 53) % 7) / 7 * 0.55, ph: k * 1.7 });
     function size() {
       var r = canvas.getBoundingClientRect(); W = r.width; H = r.height;
       canvas.width = W * dpr; canvas.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -259,23 +261,24 @@
     function draw(now) {
       var t = (now - t0) / 1000;
       ctx.clearRect(0, 0, W, H);
-      var lines = 34;
-      for (var i = 0; i < lines; i++) {
-        var p = i / lines;
-        var g = ctx.createLinearGradient(0, 0, W, 0);
-        g.addColorStop(0, "rgba(225,37,27,0)");
-        g.addColorStop(0.4, "rgba(225,37,27," + (0.08 + p * 0.35) + ")");
-        g.addColorStop(1, "rgba(255,70,55," + (0.25 + p * 0.6) + ")");
-        ctx.strokeStyle = g; ctx.lineWidth = 1.2;
-        ctx.beginPath();
-        for (var x = 0; x <= W; x += 8) {
-          var nx = x / W;
-          var y = H * (0.25 + p * 0.6)
-            + Math.sin(nx * 5.2 + t * 0.5 + p * 2.4) * H * 0.07 * (0.4 + nx)
-            + Math.sin(nx * 11 - t * 0.35 + p * 5) * H * 0.018;
-          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
+      var n = Math.max(5, Math.min(14, Math.round(W / 115))), cw = W / n, gap = 3;
+      for (var i = 0; i < n; i++) {
+        var sd = seeds[i], x = i * cw;
+        var rise = reduceMotion ? 1 : 1 - Math.pow(1 - Math.min(1, Math.max(0, t * 0.9 - i * 0.06)), 3);
+        var h = H * (sd.h + Math.sin(t * 0.45 + sd.ph) * 0.05) * rise;
+        var top = H - h;
+        var g = ctx.createLinearGradient(0, H, 0, top);
+        g.addColorStop(0, "rgba(225,37,27," + (0.75 * sd.a) + ")");
+        g.addColorStop(0.45, "rgba(150,18,14," + (0.35 * sd.a) + ")");
+        g.addColorStop(1, "rgba(225,37,27,0)");
+        ctx.fillStyle = g;
+        ctx.fillRect(x + gap / 2, top, cw - gap, h);
+        // filo de luz en el borde de cada columna
+        var e = ctx.createLinearGradient(0, H, 0, top);
+        e.addColorStop(0, "rgba(255,90,70," + (0.55 * sd.a) + ")");
+        e.addColorStop(1, "rgba(255,90,70,0)");
+        ctx.fillStyle = e;
+        ctx.fillRect(x + gap / 2, top, 1, h);
       }
       if (!reduceMotion && !document.hidden) requestAnimationFrame(draw);
     }

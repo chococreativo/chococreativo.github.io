@@ -141,7 +141,7 @@ h2 {
   background-blend-mode: normal;
 }
 .hero::after { /* desvanece la cuadrícula hacia abajo */
-  content: ""; position: absolute; inset: auto 0 0 0; height: 40%;
+  content: ""; position: absolute; inset: auto 0 0 0; height: 6%;
   background: linear-gradient(transparent, var(--ink)); pointer-events: none;
 }
 .ruler {
