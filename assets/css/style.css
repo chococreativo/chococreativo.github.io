@@ -174,16 +174,6 @@ h2 {
   object-fit: contain; object-position: bottom;
 }
 
-/* Textura de impresión dentro del círculo: trama de puntos + grano, como serigrafía */
-.sun::before, .sun::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
-.sun::before {
-  background: radial-gradient(circle, rgba(40,0,0,.75) 0 40%, transparent 43%) 0 0 / 8px 8px;
-  -webkit-mask-image: linear-gradient(150deg, transparent 25%, #000 85%); mask-image: linear-gradient(150deg, transparent 25%, #000 85%);
-  mix-blend-mode: multiply; opacity: .8;
-}
-.sun::after { background-image: var(--noise); background-size: 160px; mix-blend-mode: overlay; opacity: .55; z-index: 2; }
-.hero-photo { z-index: 1; }
-
 .hero-text { min-width: 0; }
 .hero-text .eyebrow { margin: 0 0 16px; }
 .hero-name {
