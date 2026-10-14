@@ -163,12 +163,17 @@ h2 {
   position: relative; width: 100%; aspect-ratio: 1; border-radius: 50%; overflow: hidden;
   background: radial-gradient(circle at 38% 32%, #f0372c, var(--red) 45%, #a8140c 100%);
   box-shadow: 0 30px 80px -20px rgba(225,37,27,.55);
-  will-change: transform;
 }
+.hero-visual { will-change: transform; }
 .hero-photo {
   position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 94%;
   object-fit: contain; object-position: bottom;
 }
+
+/* Línea blanca que gira alrededor del círculo */
+.orbit { position: absolute; inset: -5%; width: 110%; height: 110%; overflow: visible; pointer-events: none; animation: orbit 9s linear infinite; }
+.orbit circle { fill: none; stroke: var(--paper); stroke-width: .45; stroke-linecap: round; stroke-dasharray: 30 70; vector-effect: none; }
+@keyframes orbit { to { transform: rotate(360deg); } }
 
 .hero-text { min-width: 0; }
 .hero-text .eyebrow { margin: 0 0 16px; }

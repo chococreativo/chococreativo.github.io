@@ -235,7 +235,7 @@
     });
   });
   // Portada: el círculo y la foto se mueven juntos siguiendo el mouse, con un leve zoom
-  var hero = $(".hero"), photo = $(".sun");
+  var hero = $(".hero"), photo = $("#heroVisual");
   if (hero && photo && !reduceMotion) {
     var tx = 0.3, ty = 0.55, cx = 0.3, cy = 0.55, raf = 0;
     function tick() {
