@@ -133,7 +133,7 @@ h2 {
 /* Portada: foto en círculo rojo a la izquierda, texto a la derecha */
 .hero {
   position: relative; overflow: hidden;
-  min-height: 100svh; padding: 110px 0 36px;
+  min-height: min(100svh, 860px); padding: 110px 0 36px;
   display: flex; flex-direction: column;
   /* de negro puro (izquierda) a gris oscuro (derecha) para dar profundidad */
   background:
@@ -272,6 +272,9 @@ h2 {
 /* Sobre mí */
 .about { border-top: 1px solid var(--line); }
 .about-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
+.about-photo { margin: 32px 0 0; max-width: 420px; aspect-ratio: 4 / 5; border-radius: var(--radius); overflow: hidden; background: var(--ink-3); }
+.about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) contrast(1.15); transition: filter .5s ease, transform .6s ease; }
+.about-photo:hover img { filter: grayscale(0) contrast(1); transform: scale(1.03); }
 .about-body { min-width: 0; }
 .about-body > p { margin: 0 0 16px; color: #cfcfcc; max-width: 62ch; }
 .about-role { font-weight: 700; font-size: 1.05rem; color: var(--paper) !important; }
@@ -287,9 +290,9 @@ h2 {
 .light { background: var(--paper); color: var(--ink); padding-bottom: 0; }
 .services { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .service {
-  position: relative; min-height: 300px; padding: 26px 22px; border-radius: var(--radius);
+  position: relative; min-height: 230px; padding: 26px 22px; border-radius: var(--radius);
   background: var(--ink); color: var(--paper);
-  display: flex; flex-direction: column; justify-content: flex-end; gap: 12px;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 18px;
   transition: filter .35s ease, opacity .35s ease, transform .35s ease;
   overflow: hidden;
 }
@@ -303,7 +306,7 @@ h2 {
   transition: stroke-dashoffset 1s cubic-bezier(.65,0,.35,1);
 }
 .service:hover .frame .trace { stroke-dashoffset: 0; }
-.service h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; line-height: 1.15; letter-spacing: -0.02em; margin: 0; text-transform: uppercase; }
+.service h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.45rem; line-height: 1.15; letter-spacing: -0.02em; margin: 0; text-transform: uppercase; }
 .service p { margin: 0; font-size: 0.92rem; color: #bdbdba; }
 .service:hover { transform: translateY(-6px); }
 .service:hover h3 { color: var(--red); }
@@ -432,6 +435,7 @@ h2 {
 
 /* Coordenadas en cada sección */
 .hero > .coords { left: var(--gutter); bottom: 22px; }
+#trabajos { padding-top: clamp(40px, 5vw, 64px); }
 .section > .coords { left: var(--gutter); bottom: 22px; }
 .light > .coords { color: var(--muted-dark); bottom: auto; left: auto; right: var(--gutter); top: 40px; }
 .nav-cta.active { box-shadow: 0 0 0 3px rgba(225,37,27,.35), 0 0 16px rgba(225,37,27,.5); }

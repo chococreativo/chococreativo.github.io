@@ -35,6 +35,7 @@ content:
       - { name: ciudad, label: Ciudad, type: string }
       - { name: intro, label: Frase de portada, type: text }
       - { name: foto, label: "Foto de portada (PNG sin fondo)", type: image }
+      - { name: foto_sobre_mi, label: "Foto de Sobre mí (vertical, por ejemplo trabajando)", type: image }
       - { name: rol, label: Rol, type: string }
       - { name: sobre_mi, label: Sobre mí, type: text }
       - name: formacion

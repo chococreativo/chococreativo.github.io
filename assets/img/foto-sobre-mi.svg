@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">
+<rect width="800" height="1000" fill="#1a1a1c"/>
+<rect x="0" y="700" width="800" height="300" fill="#141415"/>
+<rect x="420" y="420" width="300" height="200" rx="10" fill="#2a2a2e"/>
+<rect x="436" y="436" width="268" height="168" rx="4" fill="#3a3a3f"/>
+<rect x="380" y="620" width="380" height="16" rx="8" fill="#2a2a2e"/>
+<circle cx="260" cy="330" r="92" fill="#2a2a2e"/>
+<path d="M90 1000 C90 640 170 470 260 470 C350 470 430 640 430 1000 Z" fill="#2a2a2e"/>
+<text x="400" y="850" text-anchor="middle" font-family="monospace" font-size="30" fill="#f4f4f2" opacity=".7">FOTO TRABAJANDO</text>
+<text x="400" y="892" text-anchor="middle" font-family="monospace" font-size="20" fill="#f4f4f2" opacity=".45">muestra · se cambia en el CMS</text>
+</svg>

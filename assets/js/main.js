@@ -41,6 +41,7 @@
       if (site.behance) a.href = site.behance; else a.hidden = true;
     });
     if (site.foto) $("#heroPhoto").src = src(site.foto);
+    if (site.foto_sobre_mi) $("#aboutPhoto").src = src(site.foto_sobre_mi);
     if (site.nombre) {
       document.title = site.nombre + (site.marca ? " · " + site.marca : "");
       splitName(site.nombre);
