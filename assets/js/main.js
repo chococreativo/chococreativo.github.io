@@ -79,15 +79,6 @@
       });
     }
 
-    // Tarjetas de vidrio de la portada con los servicios
-    var hc = $("#heroCards");
-    (site.servicios || []).slice(0, 4).forEach(function (s, i) {
-      var c = el("div", "gcard float", s.titulo);
-      c.setAttribute("data-depth", [16, -14, 22, -10][i]);
-      hc.appendChild(c);
-    });
-    floats = $all(".float");
-
     renderWorks(projects);
     setupContact(site);
     setupReveal();
