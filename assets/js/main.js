@@ -237,7 +237,7 @@
   // Portada: luz roja que sigue el mouse (con suavizado) y leve profundidad en la foto
   var hero = $(".hero"), light = $("#heroLight"), photo = $("#heroPhoto");
   if (hero && light && !reduceMotion) {
-    var tx = 0.5, ty = 0.55, cx = 0.5, cy = 0.55, raf = 0;
+    var tx = 0.3, ty = 0.55, cx = 0.3, cy = 0.55, raf = 0;
     function tick() {
       cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
       light.style.setProperty("--mx", (cx * 100).toFixed(2) + "%");
@@ -251,7 +251,7 @@
       if (!raf) raf = requestAnimationFrame(tick);
     });
     hero.addEventListener("pointerleave", function () {
-      tx = 0.5; ty = 0.55;
+      tx = 0.3; ty = 0.55;
       if (!raf) raf = requestAnimationFrame(tick);
     });
   }
