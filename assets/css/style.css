@@ -193,29 +193,36 @@ h2 {
 
 .hero-visual { position: relative; aspect-ratio: 6 / 7; max-width: 480px; width: 100%; justify-self: center; }
 .glow {
-  position: absolute; inset: 18% 6% 0 6%; border-radius: 50% 50% 0 0 / 60% 60% 0 0;
-  background: radial-gradient(70% 70% at 50% 35%, #ff4a3d, var(--red) 45%, #5a0d09 100%);
-  box-shadow: 0 0 120px 10px rgba(225,37,27,.35);
+  position: absolute; inset: 8% -10% -6% -10%; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(225,37,27,.75), rgba(150,14,8,.35) 55%, transparent 100%);
+  filter: blur(30px);
 }
-.ring {
-  position: absolute; inset: 10% -2% -2% -2%; border-radius: 50%;
-  border: 1px solid rgba(244,244,242,.25);
-  border-left-color: var(--red); border-top-color: transparent;
-  animation: spin 18s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
 .hero-photo {
   position: absolute; inset: auto 0 0 0; width: 100%; height: 100%; object-fit: contain; object-position: bottom;
   /* borde blanco tipo sticker alrededor de la foto recortada (PNG sin fondo) */
   filter: drop-shadow(4px 0 0 #fff) drop-shadow(-4px 0 0 #fff) drop-shadow(0 4px 0 #fff) drop-shadow(0 -4px 0 #fff) drop-shadow(0 18px 30px rgba(0,0,0,.5));
 }
 .float { position: absolute; transition: transform .25s ease-out; will-change: transform; }
-.float.x1 { top: 8%; left: 2%; font: 300 3.2rem/1 var(--font-body); color: var(--paper); }
-.float.x2 { top: 30%; right: -2%; font: 300 2rem/1 var(--font-body); color: var(--red); }
-.float.sphere {
-  width: 64px; height: 64px; right: 4%; top: 46%; border-radius: 50%;
-  background: radial-gradient(circle at 32% 28%, #fff 0 8%, #ff6b60 22%, var(--red) 48%, #3a0603 100%);
-  box-shadow: 0 10px 30px rgba(225,37,27,.45);
+/* Tarjetas de vidrio con los servicios, flotando alrededor de la foto */
+.hero-cards { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.gcard {
+  position: absolute; width: 150px; padding: 12px 14px 14px; border-radius: 12px;
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(225,37,27,.55), transparent 60%),
+    linear-gradient(160deg, rgba(40,40,44,.75), rgba(10,10,11,.8));
+  border: 1px solid rgba(244,244,242,.14);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.45);
+  font-size: 0.82rem; font-weight: 600; line-height: 1.25; color: var(--paper);
+}
+.gcard:nth-child(1) { top: 10%; left: -6%; }
+.gcard:nth-child(2) { top: 26%; right: -16%; }
+.gcard:nth-child(3) { bottom: 22%; left: -8%; }
+.gcard:nth-child(4) { bottom: 8%; right: -10%; }
+@media (max-width: 860px) {
+  .gcard { width: 124px; font-size: 0.74rem; padding: 10px 12px; }
+  .gcard:nth-child(1) { left: -2%; } .gcard:nth-child(2) { right: -2%; }
+  .gcard:nth-child(3), .gcard:nth-child(4) { display: none; }
 }
 
 .coords {
@@ -465,3 +472,16 @@ h2 {
 /* Títulos de sección: se mueven y se vuelven rojos al pasar el cursor */
 .section h2 { display: inline-block; transition: transform .35s cubic-bezier(.2,.8,.2,1), color .3s ease; cursor: default; }
 .section h2:hover { transform: translateX(10px); color: var(--red); }
+
+/* Ondas de luz roja (canvas) y texto gigante de fondo en la portada */
+.waves { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.bigtype {
+  position: absolute; z-index: 0; right: -2vw; bottom: -6%; margin: 0; pointer-events: none;
+  font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(4rem, 15vw, 15rem); line-height: .82; letter-spacing: -0.05em; text-align: right;
+  color: transparent; -webkit-text-stroke: 1px rgba(244,244,242,.07);
+  background: linear-gradient(180deg, rgba(244,244,242,.05), rgba(244,244,242,0) 80%);
+  -webkit-background-clip: text; background-clip: text;
+  max-width: 100%; white-space: normal;
+}
+.bigtype span { display: block; max-width: 9ch; margin-left: auto; }
