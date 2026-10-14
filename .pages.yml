@@ -1,0 +1,56 @@
+# Configuración del panel de edición (Pages CMS: https://app.pagescms.org)
+media:
+  input: assets/img
+  output: /assets/img
+
+content:
+  - name: proyectos
+    label: Trabajos
+    type: file
+    path: content/proyectos.json
+    fields:
+      - name: proyectos
+        label: Trabajos
+        type: object
+        list: true
+        fields:
+          - { name: titulo, label: Título, type: string, required: true }
+          - name: categoria
+            label: Categoría
+            type: select
+            options:
+              values: [Branding, Web, Foto y video, Pauta, Ilustración, Editorial, Redes sociales]
+          - { name: imagen, label: Imagen, type: image, required: true }
+          - { name: descripcion, label: Descripción, type: text }
+          - { name: enlace, label: "Enlace (Behance u otro, opcional)", type: string }
+
+  - name: sitio
+    label: Información general
+    type: file
+    path: content/sitio.json
+    fields:
+      - { name: nombre, label: Nombre, type: string }
+      - { name: marca, label: Marca, type: string }
+      - { name: profesion, label: Profesión, type: string }
+      - { name: ciudad, label: Ciudad, type: string }
+      - { name: intro, label: Frase de portada, type: text }
+      - { name: foto, label: "Foto de portada (PNG sin fondo)", type: image }
+      - { name: rol, label: Rol, type: string }
+      - { name: sobre_mi, label: Sobre mí, type: text }
+      - name: formacion
+        label: Formación
+        type: object
+        list: true
+        fields:
+          - { name: titulo, label: Título, type: string }
+          - { name: lugar, label: Institución, type: string }
+      - name: servicios
+        label: Servicios
+        type: object
+        list: true
+        fields:
+          - { name: titulo, label: Servicio, type: string }
+          - { name: descripcion, label: Descripción, type: text }
+      - { name: herramientas, label: Herramientas, type: string, list: true }
+      - { name: correo, label: Correo de contacto, type: string }
+      - { name: behance, label: Enlace de Behance, type: string }

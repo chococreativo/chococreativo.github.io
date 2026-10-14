@@ -1,0 +1,24 @@
+{
+  "nombre": "Edgar Altamar M.",
+  "marca": "Choco Creativo",
+  "profesion": "Diseñador gráfico",
+  "ciudad": "Barranquilla, Colombia",
+  "intro": "Diseño marcas y piezas visuales de alto impacto, y las llevo al mundo digital con sitios web, foto, video y pauta.",
+  "foto": "/assets/img/foto-muestra.svg",
+  "sobre_mi": "Soy diseñador gráfico con enfoque creativo y estratégico. Trabajo como freelance desarrollando identidades de marca y piezas visuales que conectan la estética con los objetivos comerciales. Tengo una visión 360° del entorno digital: además del diseño, produzco fotografía y video para redes, diseño sitios web y landing pages, y gestiono pauta en Meta y Google Ads.",
+  "rol": "Diseñador Gráfico y Estratega Digital · Freelance",
+  "formacion": [
+    { "titulo": "Técnico Profesional en Producción Publicitaria Digital", "lugar": "Corporación Educativa del Litoral" },
+    { "titulo": "Bootcamp de Análisis de Datos", "lugar": "Talento Tech · MinTIC / Universidad Libre" },
+    { "titulo": "Fundamentos de Marketing Digital", "lugar": "Google Activate" }
+  ],
+  "servicios": [
+    { "titulo": "Branding e identidad visual", "descripcion": "Logotipos, paletas, tipografía y manuales para que tu marca se vea igual de sólida en todas partes." },
+    { "titulo": "Sitios web y landing pages", "descripcion": "Páginas pensadas para convertir visitas en clientes, en la plataforma que mejor le sirva a tu negocio." },
+    { "titulo": "Fotografía y video para redes", "descripcion": "Contenido audiovisual institucional y publicitario, listo para publicar." },
+    { "titulo": "Pauta en Meta y Google Ads", "descripcion": "Campañas con presupuesto, segmentación y reporte de resultados para atraer clientes." }
+  ],
+  "herramientas": ["Photoshop", "Illustrator", "Premiere Pro", "WordPress", "Meta Ads", "Google Ads"],
+  "correo": "alex.altamar92@gmail.com",
+  "behance": "https://www.behance.net/gallery/244454821/PORTAFOLIO"
+}

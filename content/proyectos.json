@@ -1,0 +1,10 @@
+{
+  "proyectos": [
+    { "titulo": "Proyecto de muestra 1", "categoria": "Branding", "imagen": "/assets/img/proyectos/muestra-1.svg", "descripcion": "Texto de ejemplo. Aquí va de qué se trató el proyecto, qué hiciste y el resultado.", "enlace": "" },
+    { "titulo": "Proyecto de muestra 2", "categoria": "Web", "imagen": "/assets/img/proyectos/muestra-2.svg", "descripcion": "Texto de ejemplo. Aquí va de qué se trató el proyecto, qué hiciste y el resultado.", "enlace": "" },
+    { "titulo": "Proyecto de muestra 3", "categoria": "Foto y video", "imagen": "/assets/img/proyectos/muestra-3.svg", "descripcion": "Texto de ejemplo. Aquí va de qué se trató el proyecto, qué hiciste y el resultado.", "enlace": "" },
+    { "titulo": "Proyecto de muestra 4", "categoria": "Branding", "imagen": "/assets/img/proyectos/muestra-4.svg", "descripcion": "Texto de ejemplo. Aquí va de qué se trató el proyecto, qué hiciste y el resultado.", "enlace": "" },
+    { "titulo": "Proyecto de muestra 5", "categoria": "Pauta", "imagen": "/assets/img/proyectos/muestra-5.svg", "descripcion": "Texto de ejemplo. Aquí va de qué se trató el proyecto, qué hiciste y el resultado.", "enlace": "" },
+    { "titulo": "Proyecto de muestra 6", "categoria": "Web", "imagen": "/assets/img/proyectos/muestra-6.svg", "descripcion": "Texto de ejemplo. Aquí va de qué se trató el proyecto, qué hiciste y el resultado.", "enlace": "" }
+  ]
+}

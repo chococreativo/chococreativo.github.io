@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700">
+<g transform="translate(0,0)">
+<circle cx="300" cy="200" r="98" fill="#f4f4f2"/><path d="M118 700 C118 450 190 312 300 312 C410 312 482 450 482 700 Z" fill="#f4f4f2"/>
+<circle cx="300" cy="200" r="84" fill="#2a2a2e"/><path d="M134 700 C134 462 200 328 300 328 C400 328 466 462 466 700 Z" fill="#2a2a2e"/>
+<text x="300" y="560" text-anchor="middle" font-family="monospace" font-size="22" fill="#f4f4f2" opacity=".75">TU FOTO AQUÍ</text>
+<text x="300" y="592" text-anchor="middle" font-family="monospace" font-size="16" fill="#f4f4f2" opacity=".5">PNG sin fondo</text>
+</g></svg>

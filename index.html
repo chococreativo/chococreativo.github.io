@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Edgar Altamar M. · Choco Creativo</title>
+<meta name="description" content="Portafolio de Edgar Altamar M., diseñador gráfico en Barranquilla. Branding, sitios web, foto y video, y pauta digital.">
+<meta name="theme-color" content="#0b0b0c">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<meta property="og:title" content="Edgar Altamar M. · Choco Creativo">
+<meta property="og:description" content="Diseñador gráfico. Branding, sitios web, foto y video, y pauta digital.">
+<meta property="og:image" content="assets/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Permanent+Marker&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<!-- Filtro para bordes "gastados" (grunge) -->
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="t"/>
+    <feDisplacementMap in="SourceGraphic" in2="t" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+<div class="grain" aria-hidden="true"></div>
+
+<a class="skip" href="#trabajos">Saltar al contenido</a>
+
+<header class="nav-wrap">
+  <nav class="nav" aria-label="Principal">
+    <a class="brand" href="#inicio" aria-label="Inicio">
+      <span class="brand-mark">EA</span>
+      <span class="brand-text" data-bind="marca">Choco Creativo</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#inicio">Inicio</a>
+      <a href="#trabajos">Trabajos</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#servicios">Servicios</a>
+    </div>
+    <a class="pill pill-red nav-cta" href="#contacto">Contacto</a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú"><span></span><span></span></button>
+  </nav>
+</header>
+
+<main>
+  <!-- PORTADA -->
+  <section class="hero" id="inicio">
+    <div class="ruler" aria-hidden="true"></div>
+    <div class="scanlines" aria-hidden="true"></div>
+    <span class="crop tl" aria-hidden="true"></span><span class="crop tr" aria-hidden="true"></span>
+    <span class="crop bl" aria-hidden="true"></span><span class="crop br" aria-hidden="true"></span>
+
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow" data-bind="profesion">Diseñador gráfico</p>
+        <h1 class="hero-name" id="heroName">Edgar<br>Altamar M.</h1>
+        <p class="hero-brand"><span class="dot-red"></span><span data-bind="marca">Choco Creativo</span></p>
+        <div class="hero-intro">
+          <p data-bind="intro"></p>
+          <p class="hero-city"><span data-bind="ciudad">Barranquilla, Colombia</span></p>
+        </div>
+        <div class="hero-cta">
+          <a class="pill pill-red" href="#trabajos">Ver trabajos</a>
+          <a class="pill pill-ghost" data-href="behance" href="#" target="_blank" rel="noopener">Behance ↗</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" id="heroVisual">
+        <div class="glow" aria-hidden="true"></div>
+        <div class="halftone" aria-hidden="true"></div>
+        <div class="ring" aria-hidden="true"></div>
+        <img class="hero-photo" id="heroPhoto" src="assets/img/foto-muestra.svg" alt="Foto de Edgar Altamar M.">
+        <span class="float x1" data-depth="18" aria-hidden="true">×</span>
+        <span class="float x2" data-depth="-12" aria-hidden="true">×</span>
+        <span class="float sphere" data-depth="26" aria-hidden="true"></span>
+        <span class="float badge" data-depth="-8" aria-hidden="true">EA</span>
+        <span class="stamp" aria-hidden="true">Disponible<br>para proyectos</span>
+        <span class="note note-photo" aria-hidden="true">← ese soy yo</span>
+      </div>
+    </div>
+
+    <div class="coords" id="coords" aria-hidden="true">X 0000 · Y 0000</div>
+  </section>
+
+  <!-- TRABAJOS -->
+  <section class="section" id="trabajos">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Portafolio</p>
+        <h2>Trabajos</h2>
+      </div>
+      <div class="filters reveal" id="filters" role="group" aria-label="Filtrar trabajos"></div>
+      <div class="works" id="works"></div>
+    </div>
+  </section>
+
+  <!-- SOBRE MÍ -->
+  <section class="section about" id="sobre-mi">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <p class="eyebrow">Sobre mí</p>
+        <h2 class="about-title">Estética con<br><em class="scribble">estrategia<svg viewBox="0 0 300 90" preserveAspectRatio="none" aria-hidden="true"><path d="M18 52 C40 12 180 4 268 22 C300 30 292 70 230 80 C150 92 40 86 14 60 C2 46 30 30 60 26"/></svg></em>.</h2>
+      </div>
+      <div class="about-body reveal">
+        <p class="about-role" data-bind="rol"></p>
+        <p data-bind="sobre_mi"></p>
+        <h3 class="mini">Formación</h3>
+        <ul class="edu" id="edu"></ul>
+        <div class="hero-cta">
+          <a class="pill pill-red" href="#contacto">Trabajemos juntos</a>
+          <a class="pill pill-ghost" data-href="behance" href="#" target="_blank" rel="noopener">Ver Behance ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="section light" id="servicios">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Qué hago</p>
+        <h2>Servicios</h2>
+      </div>
+      <div class="services" id="services"></div>
+    </div>
+    <div class="marquee" aria-label="Herramientas">
+      <div class="marquee-track" id="tools"></div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="section contact" id="contacto">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <p class="eyebrow">Contacto</p>
+        <h2>¡Hablemos de<br>tu marca!</h2>
+        <p class="note note-contact" aria-hidden="true">escríbeme, no muerdo ↘</p>
+        <p class="muted">Cuéntame qué necesitas y te respondo con ideas y una propuesta.</p>
+        <div class="mail-row">
+          <span class="mail" id="mailText" data-bind="correo"></span>
+          <button class="pill pill-ghost small" id="copyMail" type="button">Copiar</button>
+        </div>
+        <p class="toast" id="copyToast" role="status"></p>
+      </div>
+      <form class="glass form reveal" id="contactForm" novalidate>
+        <div class="field">
+          <label for="f-nombre">Nombre</label>
+          <input id="f-nombre" name="nombre" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-email">Correo</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="f-tipo">¿Qué necesitas?</label>
+          <select id="f-tipo" name="tipo"></select>
+        </div>
+        <div class="field">
+          <label for="f-mensaje">Mensaje</label>
+          <textarea id="f-mensaje" name="mensaje" rows="4" required></textarea>
+        </div>
+        <button class="pill pill-red" type="submit" id="sendBtn">Enviar mensaje</button>
+        <p class="form-status" id="formStatus" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-row">
+    <span class="brand"><span class="brand-mark">EA</span><span data-bind="nombre">Edgar Altamar M.</span></span>
+    <span class="muted small-text">© <span id="year"></span> · <span data-bind="marca">Choco Creativo</span></span>
+  </div>
+</footer>
+
+<dialog class="work-dialog" id="workDialog" aria-labelledby="wdTitle">
+  <button class="close" id="wdClose" type="button" aria-label="Cerrar">×</button>
+  <img id="wdImg" alt="">
+  <div class="wd-body">
+    <p class="eyebrow" id="wdCat"></p>
+    <h3 id="wdTitle"></h3>
+    <p id="wdDesc"></p>
+    <a class="pill pill-red" id="wdLink" href="#" target="_blank" rel="noopener" hidden>Ver proyecto completo ↗</a>
+  </div>
+</dialog>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
