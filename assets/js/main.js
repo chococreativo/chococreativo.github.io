@@ -223,17 +223,25 @@
   }
 
   // Elementos flotantes que siguen el mouse + coordenadas tipo Illustrator
-  var hero = $(".hero"), coords = $("#coords"), floats = $all(".float");
+  function pad(n) { return String(Math.max(0, Math.round(n))).padStart(4, "0"); }
+  $all(".coords").forEach(function (c) {
+    var label = c.getAttribute("data-label") || "";
+    c.textContent = label + "  ·  X 0000 · Y 0000";
+    var sec = c.parentElement;
+    sec.addEventListener("pointermove", function (e) {
+      var r = sec.getBoundingClientRect();
+      c.textContent = label + "  ·  X " + pad(e.clientX - r.left) + " · Y " + pad(e.clientY - r.top);
+    });
+  });
+  var hero = $(".hero"), floats = $all(".float");
   if (hero && !reduceMotion) {
     hero.addEventListener("pointermove", function (e) {
       var r = hero.getBoundingClientRect();
-      var x = e.clientX - r.left, y = e.clientY - r.top;
-      var dx = (x / r.width - 0.5), dy = (y / r.height - 0.5);
+      var dx = ((e.clientX - r.left) / r.width - 0.5), dy = ((e.clientY - r.top) / r.height - 0.5);
       floats.forEach(function (f) {
         var d = parseFloat(f.getAttribute("data-depth")) || 10;
         f.style.transform = "translate(" + (dx * d) + "px," + (dy * d) + "px)";
       });
-      if (coords) coords.textContent = "X " + String(Math.round(x)).padStart(4, "0") + " · Y " + String(Math.round(y)).padStart(4, "0");
     });
   }
 
@@ -247,15 +255,6 @@
   if (heroName && !reduceMotion) {
     setTimeout(function loop() { glitch(); setTimeout(loop, 3500 + Math.random() * 3500); }, 2200);
     heroName.addEventListener("pointerenter", glitch);
-  }
-
-  // El círculo a mano alrededor de "estrategia" se dibuja al llegar a la sección
-  var scribble = $(".scribble");
-  if (scribble && !reduceMotion && "IntersectionObserver" in window) {
-    var sIO = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) { scribble.classList.add("draw"); sIO.disconnect(); }
-    }, { threshold: 0.6 });
-    sIO.observe(scribble);
   }
 
   // Menú en celular
@@ -274,6 +273,7 @@
       entries.forEach(function (e) {
         if (e.isIntersecting) {
           $all("a", links).forEach(function (a) { a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id); });
+          $(".nav-cta").classList.toggle("active", e.target.id === "contacto");
         }
       });
     }, { rootMargin: "-45% 0px -50% 0px" });
