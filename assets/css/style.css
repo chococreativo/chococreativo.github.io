@@ -136,14 +136,16 @@ h2 {
   min-height: 100svh; padding: 110px 0 36px;
   display: flex; flex-direction: column;
   /* de negro puro (izquierda) a gris oscuro (derecha) para dar profundidad */
-  background: linear-gradient(100deg, #000 0%, #000 30%, #141415 70%, #222224 100%);
+  background:
+    radial-gradient(42% 55% at 100% 100%, rgba(225,37,27,.22), rgba(225,37,27,.06) 50%, transparent 75%), /* resplandor rojo en la esquina */
+    linear-gradient(100deg, #000 0%, #000 30%, #141415 70%, #222224 100%);
 }
 .hero::before { /* grano de película sobre el fondo */
   content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
   background-image: var(--noise); background-size: 200px; opacity: .3; mix-blend-mode: overlay;
 }
 .hero::after { /* empata suave con el negro de la siguiente sección */
-  content: ""; position: absolute; inset: auto 0 0 0; height: 140px; pointer-events: none;
+  content: ""; position: absolute; inset: auto 0 0 0; height: 70px; pointer-events: none;
   background: linear-gradient(transparent, var(--ink));
 }
 .ruler {
