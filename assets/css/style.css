@@ -97,6 +97,7 @@ h2 {
   position: relative;
 }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; font-size: 0.9rem; white-space: nowrap; }
+.brand-egg { display: block; height: 34px; width: auto; }
 .brand-mark {
   display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
   background: var(--red); color: var(--paper);
@@ -163,12 +164,13 @@ h2 {
   align-items: center; gap: clamp(28px, 5vw, 80px);
 }
 
-/* Foto dentro de un círculo rojo */
-.hero-visual { position: relative; width: 100%; max-width: 520px; justify-self: center; }
+/* Foto dentro del huevo rojo */
+.hero-visual { position: relative; width: 100%; max-width: 440px; justify-self: center; filter: drop-shadow(0 30px 50px rgba(225,37,27,.4)); }
+/* forma de huevo (marca) en lugar del círculo */
 .sun {
-  position: relative; width: 100%; aspect-ratio: 1; border-radius: 50%; overflow: hidden;
+  position: relative; width: 100%; aspect-ratio: 2797 / 3492; overflow: hidden;
+  -webkit-mask: url(../img/huevo-mascara.png) center / 100% 100% no-repeat; mask: url(../img/huevo-mascara.png) center / 100% 100% no-repeat;
   background: radial-gradient(circle at 38% 32%, #f0372c, var(--red) 45%, #a8140c 100%);
-  box-shadow: 0 30px 80px -20px rgba(225,37,27,.55);
 }
 .hero-visual { will-change: transform; }
 .hero-photo {
@@ -211,7 +213,7 @@ h2 {
 @media (max-width: 860px) {
   .hero { min-height: auto; padding-top: 100px; }
   .hero-inner { grid-template-columns: 1fr; }
-  .hero-visual { max-width: 380px; }
+  .hero-visual { max-width: 300px; }
   .hero-name { font-size: 10.9vw; }
 }
 
