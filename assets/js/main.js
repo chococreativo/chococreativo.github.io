@@ -228,12 +228,11 @@
   // Elementos flotantes que siguen el mouse + coordenadas tipo Illustrator
   function pad(n) { return String(Math.max(0, Math.round(n))).padStart(4, "0"); }
   $all(".coords").forEach(function (c) {
-    var label = c.getAttribute("data-label") || "";
-    c.textContent = label + "  ·  X 0000 · Y 0000";
+    c.textContent = "X 0000 · Y 0000";
     var sec = c.parentElement;
     sec.addEventListener("pointermove", function (e) {
       var r = sec.getBoundingClientRect();
-      c.textContent = label + "  ·  X " + pad(e.clientX - r.left) + " · Y " + pad(e.clientY - r.top);
+      c.textContent = "X " + pad(e.clientX - r.left) + " · Y " + pad(e.clientY - r.top);
     });
   });
   var hero = $(".hero");
