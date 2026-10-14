@@ -107,10 +107,6 @@ h2 {
 .nav-links a { position: relative; }
 .nav-links a:hover { color: var(--paper); background: rgba(244,244,242,.08); }
 .nav-links a.active { color: var(--paper); background: rgba(225,37,27,.2); box-shadow: inset 0 0 0 1px rgba(225,37,27,.55); }
-.nav-links a.active::after {
-  content: ""; position: absolute; left: 50%; bottom: 3px; width: 5px; height: 5px; margin-left: -2.5px;
-  border-radius: 50%; background: var(--red);
-}
 .nav-cta { padding: 10px 18px; font-size: 0.88rem; }
 .nav-toggle { display: none; }
 
@@ -465,3 +461,7 @@ h2 {
   background: var(--red); opacity: 0; transition: opacity .3s;
 }
 .edu li:hover::before { opacity: 1; }
+
+/* Títulos de sección: se mueven y se vuelven rojos al pasar el cursor */
+.section h2 { display: inline-block; transition: transform .35s cubic-bezier(.2,.8,.2,1), color .3s ease; cursor: default; }
+.section h2:hover { transform: translateX(10px); color: var(--red); }
