@@ -161,7 +161,7 @@ h2 {
 .hero-visual { position: relative; width: 100%; max-width: 520px; justify-self: center; }
 .sun {
   position: relative; width: 100%; aspect-ratio: 1; border-radius: 50%; overflow: hidden;
-  background: radial-gradient(circle at 38% 32%, #f0372c, var(--red) 45%, #a8140c 100%);
+  background: linear-gradient(160deg, #e9655b 0%, var(--red) 70%); /* rojo un poco más pálido arriba al rojo de marca abajo */
   box-shadow: 0 30px 80px -20px rgba(225,37,27,.55);
   will-change: transform;
 }
