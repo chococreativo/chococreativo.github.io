@@ -254,23 +254,25 @@
     });
   }
 
-  // Portada: pequeñas × y círculos que aparecen y desaparecen en lugares al azar
+  // Portada: pocas × y círculos que aparecen y desaparecen con glitch, en zonas libres (márgenes y entre la foto y el texto)
   var sparks = $("#sparks");
   if (sparks) {
-    var kinds = ["x", "x", "x red", "o", "o red", "o"];
-    function place(sp) {
-      sp.style.left = (4 + Math.random() * 92).toFixed(1) + "%";
-      sp.style.top = (12 + Math.random() * 80).toFixed(1) + "%";
+    var zones = [[3, 8, 18, 30], [3, 8, 70, 88], [44, 52, 20, 38], [44, 52, 62, 82], [88, 96, 18, 36], [88, 96, 72, 90]];
+    var kinds = ["x", "o", "x red", "o", "x", "o red"];
+    function place(sp, z) {
+      sp.style.left = (z[0] + Math.random() * (z[1] - z[0])).toFixed(1) + "%";
+      sp.style.top = (z[2] + Math.random() * (z[3] - z[2])).toFixed(1) + "%";
     }
-    for (var n = 0; n < 16; n++) {
-      var sp = el("span", "spark " + kinds[n % kinds.length], kinds[n % kinds.length].indexOf("x") === 0 ? "×" : "");
-      place(sp);
-      sp.style.animationDuration = (2.8 + Math.random() * 2.4).toFixed(2) + "s";
-      sp.style.animationDelay = (Math.random() * 4).toFixed(2) + "s";
-      if (reduceMotion) { sp.style.animation = "none"; sp.style.opacity = ".5"; sp.style.transform = "none"; }
-      else sp.addEventListener("animationiteration", function () { place(this); });
+    zones.forEach(function (z, n) {
+      var k = kinds[n];
+      var sp = el("span", "spark " + k, k.indexOf("x") === 0 ? "×" : "");
+      place(sp, z);
+      sp.style.animationDuration = (4.5 + Math.random() * 2.5).toFixed(2) + "s";
+      sp.style.animationDelay = (n * 0.9 + Math.random()).toFixed(2) + "s";
+      if (reduceMotion) { sp.style.animation = "none"; sp.style.opacity = ".6"; }
+      else sp.addEventListener("animationiteration", function () { place(sp, z); });
       sparks.appendChild(sp);
-    }
+    });
   }
 
   // Glitch en el nombre: cada pocos segundos y al pasar el mouse
