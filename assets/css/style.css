@@ -179,26 +179,6 @@ h2 {
 /* Foto en blanco y negro de alto contraste sobre el rojo */
 .hero-photo { filter: grayscale(1) contrast(1.25) brightness(1.05); }
 
-/* Pocas × y círculos que aparecen y desaparecen con glitch */
-.sparks { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-.spark { position: absolute; opacity: 0; animation: spark 5s linear infinite; }
-.spark.x { font: 800 30px/1 var(--font-display); color: var(--paper); }
-.spark.o { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--paper); }
-.spark.red.x { color: var(--red); }
-.spark.red.o { border-color: var(--red); }
-@keyframes spark {
-  0%   { opacity: 0; transform: translate(0,0); filter: none; }
-  3%   { opacity: 1; transform: translate(-4px, 1px) skewX(-12deg); filter: drop-shadow(3px 0 var(--red)) drop-shadow(-3px 0 rgba(244,244,242,.7)); }
-  5%   { opacity: .3; transform: translate(3px, -1px); }
-  7%   { opacity: 1; transform: translate(-2px, 0) skewX(8deg); filter: drop-shadow(-2px 0 var(--red)) drop-shadow(2px 0 rgba(244,244,242,.6)); }
-  9%   { opacity: 1; transform: none; filter: none; }
-  62%  { opacity: 1; transform: none; filter: none; }
-  64%  { opacity: 1; transform: translate(4px, 0) skewX(10deg); filter: drop-shadow(-3px 0 var(--red)) drop-shadow(3px 0 rgba(244,244,242,.7)); }
-  66%  { opacity: .2; transform: translate(-3px, 1px); }
-  68%  { opacity: .9; transform: translate(2px, -1px) skewX(-8deg); filter: drop-shadow(2px 0 var(--red)); }
-  70%, 100% { opacity: 0; transform: none; filter: none; }
-}
-
 .hero-text { min-width: 0; }
 .hero-text .eyebrow { margin: 0 0 16px; }
 .hero-name {
