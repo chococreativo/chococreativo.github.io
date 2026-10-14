@@ -234,15 +234,13 @@
       c.textContent = "X " + pad(e.clientX - r.left) + " · Y " + pad(e.clientY - r.top);
     });
   });
-  // Portada: luz roja que sigue el mouse (con suavizado); el círculo y la foto se mueven juntos con un leve zoom
-  var hero = $(".hero"), light = $("#heroLight"), photo = $(".sun");
-  if (hero && light && !reduceMotion) {
+  // Portada: el círculo y la foto se mueven juntos siguiendo el mouse, con un leve zoom
+  var hero = $(".hero"), photo = $(".sun");
+  if (hero && photo && !reduceMotion) {
     var tx = 0.3, ty = 0.55, cx = 0.3, cy = 0.55, raf = 0;
     function tick() {
       cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
-      light.style.setProperty("--mx", (cx * 100).toFixed(2) + "%");
-      light.style.setProperty("--my", (cy * 100).toFixed(2) + "%");
-      if (photo) photo.style.transform = "translate(" + ((cx - 0.5) * -12).toFixed(1) + "px," + ((cy - 0.5) * -8).toFixed(1) + "px) scale(" + (1 + Math.max(0, 0.5 - Math.hypot(cx - 0.3, cy - 0.5)) * 0.08).toFixed(3) + ")";
+      photo.style.transform = "translate(" + ((cx - 0.5) * -12).toFixed(1) + "px," + ((cy - 0.5) * -8).toFixed(1) + "px) scale(" + (1 + Math.max(0, 0.5 - Math.hypot(cx - 0.3, cy - 0.5)) * 0.08).toFixed(3) + ")";
       raf = (Math.abs(tx - cx) + Math.abs(ty - cy) > 0.001) ? requestAnimationFrame(tick) : 0;
     }
     hero.addEventListener("pointermove", function (e) {
