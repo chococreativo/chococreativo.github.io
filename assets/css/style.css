@@ -138,6 +138,10 @@ h2 {
   /* de negro puro (izquierda) a gris oscuro (derecha) para dar profundidad */
   background: linear-gradient(100deg, #000 0%, #000 30%, #141415 70%, #222224 100%);
 }
+.hero::before { /* grano de película sobre el fondo */
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image: var(--noise); background-size: 200px; opacity: .3; mix-blend-mode: overlay;
+}
 .hero::after { /* empata suave con el negro de la siguiente sección */
   content: ""; position: absolute; inset: auto 0 0 0; height: 140px; pointer-events: none;
   background: linear-gradient(transparent, var(--ink));
@@ -170,9 +174,19 @@ h2 {
   object-fit: contain; object-position: bottom;
 }
 
+/* Textura de impresión dentro del círculo: trama de puntos + grano, como serigrafía */
+.sun::before, .sun::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+.sun::before {
+  background: radial-gradient(circle, rgba(40,0,0,.75) 0 40%, transparent 43%) 0 0 / 8px 8px;
+  -webkit-mask-image: linear-gradient(150deg, transparent 25%, #000 85%); mask-image: linear-gradient(150deg, transparent 25%, #000 85%);
+  mix-blend-mode: multiply; opacity: .8;
+}
+.sun::after { background-image: var(--noise); background-size: 160px; mix-blend-mode: overlay; opacity: .55; z-index: 2; }
+.hero-photo { z-index: 1; }
+
 /* Línea blanca que gira alrededor del círculo */
-.orbit { position: absolute; inset: -5%; width: 110%; height: 110%; overflow: visible; pointer-events: none; animation: orbit 9s linear infinite; }
-.orbit circle { fill: none; stroke: var(--paper); stroke-width: .45; stroke-linecap: round; stroke-dasharray: 30 70; vector-effect: none; }
+.orbit { position: absolute; inset: -5%; width: 110%; height: 110%; overflow: visible; pointer-events: none; animation: orbit 4s cubic-bezier(.55,.1,.45,.9) infinite; }
+.orbit circle { fill: none; stroke: var(--paper); stroke-width: .6; stroke-linecap: butt; stroke-dasharray: 16 1.2 7 .8 3 1.5 2 68.5; filter: url(#rough); }
 @keyframes orbit { to { transform: rotate(360deg); } }
 
 .hero-text { min-width: 0; }
