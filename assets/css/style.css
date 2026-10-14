@@ -176,6 +176,22 @@ h2 {
   object-fit: contain; object-position: bottom;
 }
 
+/* Foto en blanco y negro de alto contraste sobre el rojo */
+.hero-photo { filter: grayscale(1) contrast(1.25) brightness(1.05); }
+
+/* Pequeñas × y círculos que aparecen y desaparecen */
+.sparks { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.spark { position: absolute; opacity: 0; transform: scale(.4) rotate(0deg); animation: spark 3.6s ease-in-out infinite; }
+.spark.x { font: 400 26px/1 var(--font-mono); color: var(--paper); }
+.spark.x.red { color: var(--red); }
+.spark.o { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--paper); }
+.spark.o.red { border: 0; background: var(--red); width: 10px; height: 10px; }
+@keyframes spark {
+  0% { opacity: 0; transform: scale(.4) rotate(0deg); }
+  20%, 70% { opacity: .9; transform: scale(1) rotate(90deg); }
+  100% { opacity: 0; transform: scale(.4) rotate(180deg); }
+}
+
 .hero-text { min-width: 0; }
 .hero-text .eyebrow { margin: 0 0 16px; }
 .hero-name {

@@ -254,6 +254,25 @@
     });
   }
 
+  // Portada: pequeñas × y círculos que aparecen y desaparecen en lugares al azar
+  var sparks = $("#sparks");
+  if (sparks) {
+    var kinds = ["x", "x", "x red", "o", "o red", "o"];
+    function place(sp) {
+      sp.style.left = (4 + Math.random() * 92).toFixed(1) + "%";
+      sp.style.top = (12 + Math.random() * 80).toFixed(1) + "%";
+    }
+    for (var n = 0; n < 16; n++) {
+      var sp = el("span", "spark " + kinds[n % kinds.length], kinds[n % kinds.length].indexOf("x") === 0 ? "×" : "");
+      place(sp);
+      sp.style.animationDuration = (2.8 + Math.random() * 2.4).toFixed(2) + "s";
+      sp.style.animationDelay = (Math.random() * 4).toFixed(2) + "s";
+      if (reduceMotion) { sp.style.animation = "none"; sp.style.opacity = ".5"; sp.style.transform = "none"; }
+      else sp.addEventListener("animationiteration", function () { place(this); });
+      sparks.appendChild(sp);
+    }
+  }
+
   // Glitch en el nombre: cada pocos segundos y al pasar el mouse
   var heroName = $("#heroName");
   function glitch() {
