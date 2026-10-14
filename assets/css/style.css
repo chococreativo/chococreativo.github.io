@@ -286,17 +286,18 @@ h2 {
   transition: filter .35s ease, opacity .35s ease, transform .35s ease;
   overflow: hidden;
 }
-.service::before { /* marco técnico */
-  content: ""; position: absolute; inset: 10px; border: 1px dashed rgba(244,244,242,.14); border-radius: 12px; pointer-events: none;
+/* Marco de la tarjeta: línea fina fija y una roja que recorre todo el borde al pasar el mouse */
+.service .frame { position: absolute; inset: 10px; width: calc(100% - 20px); height: calc(100% - 20px); overflow: visible; pointer-events: none; }
+.service .frame rect { fill: none; vector-effect: non-scaling-stroke; }
+.service .frame .base { stroke: rgba(244,244,242,.14); stroke-width: 1; }
+.service .frame .trace {
+  stroke: var(--red); stroke-width: 2; stroke-linecap: round;
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1s cubic-bezier(.65,0,.35,1);
 }
+.service:hover .frame .trace { stroke-dashoffset: 0; }
 .service h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; line-height: 1.15; letter-spacing: -0.02em; margin: 0; text-transform: uppercase; }
 .service p { margin: 0; font-size: 0.92rem; color: #bdbdba; }
-.service::after {
-  content: ""; position: absolute; left: 22px; right: 22px; bottom: 18px; height: 3px; border-radius: 3px;
-  background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform .45s cubic-bezier(.2,.8,.2,1);
-}
-.service:hover::after { transform: scaleX(1); }
-.service:hover::before { border-color: rgba(225,37,27,.6); }
 .service:hover { transform: translateY(-6px); }
 .service:hover h3 { color: var(--red); }
 @media (hover: hover) {

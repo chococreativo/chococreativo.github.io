@@ -60,6 +60,9 @@
     var services = $("#services"), select = $("#f-tipo");
     (site.servicios || []).forEach(function (s, i) {
       var card = el("article", "service");
+      card.insertAdjacentHTML("afterbegin",
+        '<svg class="frame" aria-hidden="true"><rect class="base" x="0" y="0" width="100%" height="100%" rx="12" pathLength="1"/>' +
+        '<rect class="trace" x="0" y="0" width="100%" height="100%" rx="12" pathLength="1"/></svg>');
       var body = el("div");
       body.appendChild(el("h3", null, s.titulo));
       body.appendChild(el("p", null, s.descripcion));
