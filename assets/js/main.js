@@ -2,7 +2,6 @@
    El contenido se edita desde el panel (Pages CMS) y vive en content/sitio.json y content/proyectos.json. */
 (function () {
   "use strict";
-  var floats = [];
 
   // Formulario: FormSubmit reenvía los mensajes al correo sin necesidad de servidor.
   // La primera vez que alguien escriba, FormSubmit manda un correo para activar el formulario.
@@ -235,52 +234,26 @@
       c.textContent = "X " + pad(e.clientX - r.left) + " · Y " + pad(e.clientY - r.top);
     });
   });
-  var hero = $(".hero");
-  if (hero && !reduceMotion) {
+  // Portada: luz roja que sigue el mouse (con suavizado) y leve profundidad en la foto
+  var hero = $(".hero"), light = $("#heroLight"), photo = $("#heroPhoto");
+  if (hero && light && !reduceMotion) {
+    var tx = 0.5, ty = 0.55, cx = 0.5, cy = 0.55, raf = 0;
+    function tick() {
+      cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
+      light.style.setProperty("--mx", (cx * 100).toFixed(2) + "%");
+      light.style.setProperty("--my", (cy * 100).toFixed(2) + "%");
+      if (photo) photo.style.transform = "translate(" + ((cx - 0.5) * -14).toFixed(1) + "px," + ((cy - 0.5) * -8).toFixed(1) + "px)";
+      raf = (Math.abs(tx - cx) + Math.abs(ty - cy) > 0.001) ? requestAnimationFrame(tick) : 0;
+    }
     hero.addEventListener("pointermove", function (e) {
       var r = hero.getBoundingClientRect();
-      var dx = ((e.clientX - r.left) / r.width - 0.5), dy = ((e.clientY - r.top) / r.height - 0.5);
-      floats.forEach(function (f) {
-        var d = parseFloat(f.getAttribute("data-depth")) || 10;
-        f.style.transform = "translate(" + (dx * d) + "px," + (dy * d) + "px)";
-      });
+      tx = (e.clientX - r.left) / r.width; ty = (e.clientY - r.top) / r.height;
+      if (!raf) raf = requestAnimationFrame(tick);
     });
-  }
-
-  // Ondas de luz roja en la portada
-  var canvas = $("#waves");
-  if (canvas && canvas.getContext) {
-    var ctx = canvas.getContext("2d"), W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2), t0 = performance.now();
-    function size() {
-      var r = canvas.getBoundingClientRect(); W = r.width; H = r.height;
-      canvas.width = W * dpr; canvas.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-    function draw(now) {
-      var t = (now - t0) / 1000;
-      ctx.clearRect(0, 0, W, H);
-      var lines = 34;
-      for (var i = 0; i < lines; i++) {
-        var p = i / lines;
-        var g = ctx.createLinearGradient(0, 0, W, 0);
-        g.addColorStop(0, "rgba(225,37,27,0)");
-        g.addColorStop(0.4, "rgba(225,37,27," + (0.08 + p * 0.35) + ")");
-        g.addColorStop(1, "rgba(255,70,55," + (0.25 + p * 0.6) + ")");
-        ctx.strokeStyle = g; ctx.lineWidth = 1.2;
-        ctx.beginPath();
-        for (var x = 0; x <= W; x += 8) {
-          var nx = x / W;
-          var y = H * (0.25 + p * 0.6)
-            + Math.sin(nx * 5.2 + t * 0.5 + p * 2.4) * H * 0.07 * (0.4 + nx)
-            + Math.sin(nx * 11 - t * 0.35 + p * 5) * H * 0.018;
-          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-      }
-      if (!reduceMotion && !document.hidden) requestAnimationFrame(draw);
-    }
-    size(); requestAnimationFrame(draw);
-    window.addEventListener("resize", function () { size(); if (reduceMotion) requestAnimationFrame(draw); });
-    document.addEventListener("visibilitychange", function () { if (!document.hidden && !reduceMotion) requestAnimationFrame(draw); });
+    hero.addEventListener("pointerleave", function () {
+      tx = 0.5; ty = 0.55;
+      if (!raf) raf = requestAnimationFrame(tick);
+    });
   }
 
   // Glitch en el nombre: cada pocos segundos y al pasar el mouse
