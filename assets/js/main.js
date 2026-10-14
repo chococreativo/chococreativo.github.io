@@ -248,17 +248,55 @@
     });
   }
 
-  // Columnas de luz roja en la portada: suben desde abajo a distintas alturas
+  // Ondas de luz roja en la portada
   var canvas = $("#waves");
   if (canvas && canvas.getContext) {
     var ctx = canvas.getContext("2d"), W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2), t0 = performance.now();
-    var seeds = [];
-    for (var k = 0; k < 24; k++) seeds.push({ h: 0.3 + ((k * 37) % 11) / 11 * 0.45, a: 0.45 + ((k * 53) % 7) / 7 * 0.55, ph: k * 1.7 });
     function size() {
       var r = canvas.getBoundingClientRect(); W = r.width; H = r.height;
       canvas.width = W * dpr; canvas.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
     function draw(now) {
+      var t = (now - t0) / 1000;
+      ctx.clearRect(0, 0, W, H);
+      var lines = 34;
+      for (var i = 0; i < lines; i++) {
+        var p = i / lines;
+        var g = ctx.createLinearGradient(0, 0, W, 0);
+        g.addColorStop(0, "rgba(225,37,27,0)");
+        g.addColorStop(0.4, "rgba(225,37,27," + (0.08 + p * 0.35) + ")");
+        g.addColorStop(1, "rgba(255,70,55," + (0.25 + p * 0.6) + ")");
+        ctx.strokeStyle = g; ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        for (var x = 0; x <= W; x += 8) {
+          var nx = x / W;
+          var y = H * (0.25 + p * 0.6)
+            + Math.sin(nx * 5.2 + t * 0.5 + p * 2.4) * H * 0.07 * (0.4 + nx)
+            + Math.sin(nx * 11 - t * 0.35 + p * 5) * H * 0.018;
+          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+      if (!reduceMotion && !document.hidden) requestAnimationFrame(draw);
+    }
+    size(); requestAnimationFrame(draw);
+    window.addEventListener("resize", function () { size(); if (reduceMotion) requestAnimationFrame(draw); });
+    document.addEventListener("visibilitychange", function () { if (!document.hidden && !reduceMotion) requestAnimationFrame(draw); });
+  }
+
+  // Columnas de luz roja en Contacto: suben desde abajo cuando la sección aparece
+  (function () {
+  var bars = $("#bars");
+  if (bars && bars.getContext) {
+    var canvas = bars, ctx = bars.getContext("2d"), W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2), t0 = 0, running = false;
+    var seeds = [];
+    for (var k = 0; k < 24; k++) seeds.push({ h: 0.22 + ((k * 37) % 11) / 11 * 0.38, a: 0.45 + ((k * 53) % 7) / 7 * 0.55, ph: k * 1.7 });
+    function size() {
+      var r = canvas.getBoundingClientRect(); W = r.width; H = r.height;
+      canvas.width = W * dpr; canvas.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    function draw(now) {
+      if (!t0) t0 = now;
       var t = (now - t0) / 1000;
       ctx.clearRect(0, 0, W, H);
       var n = Math.max(5, Math.min(14, Math.round(W / 115))), cw = W / n, gap = 3;
@@ -280,12 +318,17 @@
         ctx.fillStyle = e;
         ctx.fillRect(x + gap / 2, top, 1, h);
       }
-      if (!reduceMotion && !document.hidden) requestAnimationFrame(draw);
+      if (running && !reduceMotion && !document.hidden) requestAnimationFrame(draw);
     }
-    size(); requestAnimationFrame(draw);
-    window.addEventListener("resize", function () { size(); if (reduceMotion) requestAnimationFrame(draw); });
-    document.addEventListener("visibilitychange", function () { if (!document.hidden && !reduceMotion) requestAnimationFrame(draw); });
+    size();
+    new IntersectionObserver(function (es) {
+      var was = running; running = es[0].isIntersecting;
+      if (running && !was) requestAnimationFrame(draw);
+    }, { threshold: 0.15 }).observe(bars.parentNode);
+    window.addEventListener("resize", function () { size(); requestAnimationFrame(draw); });
+    document.addEventListener("visibilitychange", function () { if (!document.hidden && running && !reduceMotion) requestAnimationFrame(draw); });
   }
+  })();
 
   // Glitch en el nombre: cada pocos segundos y al pasar el mouse
   var heroName = $("#heroName");

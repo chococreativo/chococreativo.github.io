@@ -141,7 +141,7 @@ h2 {
   background-blend-mode: normal;
 }
 .hero::after { /* desvanece la cuadrícula hacia abajo */
-  content: ""; position: absolute; inset: auto 0 0 0; height: 6%;
+  content: ""; position: absolute; inset: auto 0 0 0; height: 40%;
   background: linear-gradient(transparent, var(--ink)); pointer-events: none;
 }
 .ruler {
@@ -321,6 +321,9 @@ h2 {
     radial-gradient(50% 60% at 85% 60%, rgba(225,37,27,.22), transparent 70%),
     var(--ink);
 }
+.contact { overflow: hidden; padding-bottom: clamp(140px, 18vw, 220px); }
+.contact .bars { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.contact .wrap { position: relative; z-index: 1; }
 .contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
 .contact h2 { margin-bottom: 16px; }
 .mail-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 26px; }
