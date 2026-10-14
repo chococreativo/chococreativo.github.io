@@ -184,11 +184,6 @@ h2 {
 .sun::after { background-image: var(--noise); background-size: 160px; mix-blend-mode: overlay; opacity: .55; z-index: 2; }
 .hero-photo { z-index: 1; }
 
-/* Línea blanca que gira alrededor del círculo */
-.orbit { position: absolute; inset: -5%; width: 110%; height: 110%; overflow: visible; pointer-events: none; animation: orbit 4s cubic-bezier(.55,.1,.45,.9) infinite; }
-.orbit circle { fill: none; stroke: var(--paper); stroke-width: .6; stroke-linecap: butt; stroke-dasharray: 16 1.2 7 .8 3 1.5 2 68.5; filter: url(#rough); }
-@keyframes orbit { to { transform: rotate(360deg); } }
-
 .hero-text { min-width: 0; }
 .hero-text .eyebrow { margin: 0 0 16px; }
 .hero-name {
