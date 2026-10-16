@@ -4,8 +4,9 @@
   "use strict";
 
   // Formulario: FormSubmit reenvía los mensajes al correo sin necesidad de servidor.
-  // La primera vez que alguien escriba, FormSubmit manda un correo para activar el formulario.
-  var FORM_ENDPOINT = "https://formsubmit.co/ajax/";
+  // Se usa el código que FormSubmit dio al activarlo, en vez del correo, para que el correo no quede en la dirección de envío.
+  // Si el correo de contacto cambia, hay que activar FormSubmit con el correo nuevo y poner aquí su código.
+  var FORM_ENDPOINT = "https://formsubmit.co/ajax/e845a0930c76ece9521f95b99f5a9f0a";
 
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -193,7 +194,7 @@
       };
       btn.disabled = true;
       status.textContent = "Enviando…";
-      fetch(FORM_ENDPOINT + encodeURIComponent(site.correo), {
+      fetch(FORM_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify(data)
