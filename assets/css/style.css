@@ -412,7 +412,7 @@ main section[id] { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 96px)
   50% { transform: translate(2%, -3%); } 75% { transform: translate(-2%, -1%); } 100% { transform: translate(0, 0); }
 }
 
-/* Glitch: se dispara solo cada pocos segundos y al pasar el mouse */
+/* Glitch: una vez al terminar de subir el nombre, y al pasar el mouse o tocarlo */
 .hero-name.glitch .ln { animation: glitch .45s steps(3) 1; }
 .hero-name.glitch .ln:nth-child(2) { animation-delay: .06s; }
 @keyframes glitch {
