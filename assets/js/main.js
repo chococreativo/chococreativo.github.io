@@ -270,12 +270,21 @@
 
   // Menú en celular
   var toggle = $("#navToggle"), links = $("#navLinks");
-  toggle.addEventListener("click", function () {
-    var open = links.classList.toggle("open");
+  function setMenu(open) {
+    links.classList.toggle("open", open);
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
-  });
+    toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+  }
+  toggle.addEventListener("click", function () { setMenu(!links.classList.contains("open")); });
   $all("a", links).forEach(function (a) {
-    a.addEventListener("click", function () { links.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); });
+    a.addEventListener("click", function () { setMenu(false); });
+  });
+  // Se cierra con Escape o tocando fuera del menú
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && links.classList.contains("open")) { setMenu(false); toggle.focus(); }
+  });
+  document.addEventListener("click", function (e) {
+    if (links.classList.contains("open") && !links.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
   });
 
   // Marca la sección activa en el menú
