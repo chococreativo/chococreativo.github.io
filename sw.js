@@ -1,11 +1,13 @@
 // Modo app: guarda el sitio para abrirlo rápido y sin conexión.
 // El contenido (content/*.json) y las imágenes se buscan primero en internet para mostrar siempre lo último del panel.
-const CACHE = "choco-v2";
+const CACHE = "choco-v3";
 const SHELL = [
   "./",
   "index.html",
   "assets/css/style.css",
   "assets/js/main.js",
+  "assets/fonts/unbounded.woff2",
+  "assets/fonts/manrope.woff2",
   "manifest.webmanifest",
   "assets/icons/icon-192.png",
   "assets/icons/icon-512.png"

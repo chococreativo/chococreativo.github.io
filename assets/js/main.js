@@ -29,7 +29,8 @@
   }
 
   // El nombre empieza a subir con el texto de index.html, sin esperar a que cargue el panel
-  // riseEnd: milisegundos hasta que termina de subir la última letra
+  // riseEnd: milisegundos hasta que termina de subir la última letra, contados desde que arranca
+  var nameFont = waitNameFont();
   var riseEnd = splitName(nameFromHTML(), true);
 
   Promise.all([getJSON("content/sitio.json"), getJSON("content/proyectos.json")])
@@ -91,6 +92,18 @@
     renderWorks(projects);
     setupContact(site);
     setupReveal();
+  }
+
+  // Las letras esperan a Unbounded para subir con la fuente real; si tarda más de 1 s o falla, arrancan igual.
+  // Sin document.fonts o con movimiento reducido, no se espera.
+  function waitNameFont() {
+    var h = $("#heroName");
+    if (reduceMotion || !document.fonts || !document.fonts.load) return Promise.resolve();
+    h.classList.add("wait");
+    return Promise.race([
+      document.fonts.load('800 1em "Unbounded"').catch(function () {}),
+      new Promise(function (r) { setTimeout(r, 1000); })
+    ]).then(function () { h.classList.remove("wait"); });
   }
 
   // Nombre escrito en index.html; el <br> separa las dos líneas
@@ -278,7 +291,7 @@
     setTimeout(function () { heroName.classList.remove("glitch"); }, 600);
   }
   if (heroName && !reduceMotion) {
-    setTimeout(glitch, riseEnd + 150);
+    nameFont.then(function () { setTimeout(glitch, riseEnd + 150); });
     heroName.addEventListener("pointerenter", glitch);
     heroName.addEventListener("pointerdown", function (e) { if (e.pointerType !== "mouse") glitch(); });
   }

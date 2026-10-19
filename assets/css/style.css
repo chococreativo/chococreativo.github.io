@@ -1,6 +1,17 @@
 /* Edgar Altamar M. · ChocoCreativo
    Concepto: la mesa de trabajo de un diseñador. Fondo negro, texto blanco y rojo como único acento.
    Reglas, marcas de corte y coordenadas (como en Illustrator) dan el toque tecnológico. */
+/* Fuentes alojadas en el sitio (SIL Open Font License 1.1, ver assets/fonts/OFL-*.txt).
+   Cada archivo es variable: trae todos los grosores. Solo alfabeto latino (incluye ñ y tildes). */
+@font-face {
+  font-family: "Unbounded"; font-style: normal; font-weight: 500 800; font-display: swap;
+  src: url(../fonts/unbounded.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Manrope"; font-style: normal; font-weight: 400 700; font-display: swap;
+  src: url(../fonts/manrope.woff2) format("woff2");
+}
+
 :root {
   --ink: #000000;
   --ink-2: #101011;
@@ -196,6 +207,8 @@ h2 {
 .hero-name .ch { display: inline-block; transform: translateY(105%); animation: rise .8s cubic-bezier(.2,.8,.2,1) forwards; }
 .hero-name .ch.sp { width: 0.25em; }
 @keyframes rise { to { transform: translateY(0); } }
+/* Mientras espera a Unbounded (máximo 1 s), las letras no arrancan */
+.hero-name.wait .ch { animation-play-state: paused; }
 .hero-name .ln:last-child .ch:last-child { color: var(--red); }
 
 .hero-brand {
