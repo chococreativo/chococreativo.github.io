@@ -82,11 +82,10 @@ h2 {
   min-height: 44px; /* tamaño táctil mínimo */
   font: 600 0.95rem/1 var(--font-body);
   text-decoration: none; cursor: pointer; border: 1px solid transparent;
-  transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
 }
-.pill:hover { transform: translateY(-2px); }
 .pill-red { background: var(--red-btn); color: var(--paper); }
-.pill-red:hover { background: var(--paper); color: var(--ink); box-shadow: 0 0 18px rgba(225,37,27,.45), 0 0 4px rgba(244,244,242,.35); }
+.pill-red:hover { background: var(--paper); color: var(--ink); }
 .pill-ghost { border-color: var(--line); color: var(--paper); background: rgba(244,244,242,.04); }
 .pill-ghost:hover { border-color: var(--paper); }
 .pill.small { padding: 8px 14px; font-size: 0.82rem; }
@@ -245,7 +244,7 @@ main section[id] { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 96px)
   font: 600 0.88rem/1 var(--font-body);
   padding: 9px 16px; border-radius: 999px; cursor: pointer;
   border: 1px solid var(--line); background: transparent; color: var(--muted);
-  transition: all .2s ease;
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
 }
 .chip:hover { color: var(--paper); border-color: var(--paper); }
 .chip[aria-pressed="true"] { background: var(--paper); color: var(--ink); border-color: var(--paper); }
@@ -313,7 +312,7 @@ main section[id] { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 96px)
   position: relative; min-height: 230px; padding: 26px 22px; border-radius: var(--radius);
   background: var(--ink); color: var(--paper);
   display: flex; flex-direction: column; justify-content: space-between; gap: 18px;
-  transition: filter .35s ease, opacity .35s ease, transform .35s ease;
+  transition: opacity .35s ease;
   overflow: hidden;
 }
 /* Marco de la tarjeta: línea fina fija y una roja que recorre todo el borde al pasar el mouse */
@@ -328,10 +327,9 @@ main section[id] { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 96px)
 .service:hover .frame .trace { stroke-dashoffset: 0; }
 .service h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.45rem; line-height: 1.15; letter-spacing: -0.02em; margin: 0; text-transform: uppercase; }
 .service p { margin: 0; font-size: 0.92rem; color: #bdbdba; }
-.service:hover { transform: translateY(-6px); }
 .service:hover h3 { color: var(--red); }
 @media (hover: hover) {
-  .services:hover .service:not(:hover) { filter: blur(4px); opacity: .45; }
+  .services:hover .service:not(:hover) { opacity: .45; }
 }
 @media (max-width: 980px) { .services { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .services { grid-template-columns: 1fr; } .service { min-height: 0; } }
@@ -400,7 +398,9 @@ main section[id] { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 96px)
 }
 
 /* Aparición al hacer scroll (visible por defecto) */
-.reveal { transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1), filter .35s ease, border-color .3s ease; }
+.reveal { transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+/* Las tarjetas de Servicios también aparecen al hacer scroll: entran igual, pero se atenúan rápido al pasar el mouse */
+.service.reveal { transition: opacity .35s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
 .reveal.pre { opacity: 0.2; transform: translateY(24px); }
 
 @media (prefers-reduced-motion: reduce) {
@@ -454,6 +454,9 @@ main section[id] { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 96px)
   .grain { animation: none; }
 }
 
+/* Títulos de sección: sin efecto al pasar el mouse (no son clicables) */
+.section h2 { display: inline-block; }
+
 /* Coordenadas en cada sección */
 .hero > .coords { left: var(--gutter); bottom: 22px; }
 #trabajos { padding-top: clamp(40px, 5vw, 64px); }
@@ -461,20 +464,5 @@ main section[id] { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 96px)
 .light > .coords { color: var(--muted-dark); bottom: auto; left: auto; right: var(--gutter); top: 40px; }
 .nav-cta.active { box-shadow: 0 0 0 3px rgba(225,37,27,.35), 0 0 16px rgba(225,37,27,.5); }
 @media (max-width: 560px) { .coords { display: none; } }
-
-/* Bloques de "Sobre mí" que se mueven al pasar el mouse */
-.shift, .edu li { transition: transform .35s cubic-bezier(.2,.8,.2,1), color .35s ease; }
-.shift:hover, .edu li:hover { transform: translateX(10px); }
-.about-body > p.shift:hover { color: var(--paper); }
-.edu li { position: relative; }
-.edu li::before {
-  content: ""; position: absolute; left: -14px; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%;
-  background: var(--red); opacity: 0; transition: opacity .3s;
-}
-.edu li:hover::before { opacity: 1; }
-
-/* Títulos de sección: se mueven y se vuelven rojos al pasar el cursor */
-.section h2 { display: inline-block; transition: transform .35s cubic-bezier(.2,.8,.2,1), color .3s ease; cursor: default; }
-.section h2:hover { transform: translateX(10px); color: var(--red); }
 
 /* Ondas de luz roja (canvas) y texto gigante de fondo en la portada */
