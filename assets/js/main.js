@@ -28,6 +28,9 @@
     });
   }
 
+  // El nombre empieza a subir con el texto de index.html, sin esperar a que cargue el panel
+  splitName(nameFromHTML(), true);
+
   Promise.all([getJSON("content/sitio.json"), getJSON("content/proyectos.json")])
     .then(function (res) { render(res[0], (res[1] && res[1].proyectos) || []); })
     .catch(function (err) { console.error("No se pudo cargar el contenido:", err); });
@@ -45,7 +48,8 @@
     if (site.foto_sobre_mi) $("#aboutPhoto").src = src(site.foto_sobre_mi);
     if (site.nombre) {
       document.title = site.nombre + (site.marca ? " · " + site.marca : "");
-      splitName(site.nombre);
+      // Si el panel trae otro nombre, se cambia sin repetir la animación
+      if (site.nombre.trim() !== $("#heroName").getAttribute("aria-label")) splitName(site.nombre, false);
     }
 
     // Formación
@@ -88,10 +92,17 @@
     setupReveal();
   }
 
+  // Nombre escrito en index.html; el <br> separa las dos líneas
+  function nameFromHTML() {
+    return Array.prototype.map.call($("#heroName").childNodes, function (n) { return n.textContent; })
+      .join(" ").replace(/\s+/g, " ").trim();
+  }
+
   // Nombre: cada letra sube desde abajo al cargar
-  function splitName(name) {
+  function splitName(name, animate) {
     var h = $("#heroName");
-    var words = name.trim().split(/\s+/);
+    name = name.trim();
+    var words = name.split(/\s+/);
     var lines = words.length > 1 ? [words[0], words.slice(1).join(" ")] : [name];
     h.textContent = "";
     h.setAttribute("aria-label", name);
@@ -101,7 +112,8 @@
       ln.setAttribute("aria-hidden", "true");
       Array.prototype.forEach.call(line, function (c) {
         var ch = el("span", c === " " ? "ch sp" : "ch", c === " " ? " " : c);
-        ch.style.animationDelay = (reduceMotion ? 0 : 0.15 + idx * 0.035) + "s";
+        if (animate) ch.style.animationDelay = (reduceMotion ? 0 : 0.15 + idx * 0.035) + "s";
+        else { ch.style.animation = "none"; ch.style.transform = "none"; }
         idx++;
         ln.appendChild(ch);
       });
