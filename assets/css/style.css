@@ -461,7 +461,7 @@ main section[id] { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 96px)
 #trabajos { padding-top: clamp(40px, 5vw, 64px); }
 .section > .coords { left: var(--gutter); bottom: 22px; }
 .light > .coords { color: var(--muted-dark); bottom: auto; left: auto; right: var(--gutter); top: 40px; }
-.nav-cta.active { box-shadow: 0 0 0 3px rgba(225,37,27,.35), 0 0 16px rgba(225,37,27,.5); }
+.nav-cta.active { box-shadow: 0 0 0 3px rgba(225,37,27,.35); }
 @media (max-width: 560px) { .coords { display: none; } }
 
 /* Ondas de luz roja (canvas) y texto gigante de fondo en la portada */
