@@ -263,25 +263,6 @@
       c.textContent = "X " + pad(e.clientX - r.left) + " · Y " + pad(e.clientY - r.top);
     });
   });
-  // Portada: el círculo y la foto se mueven juntos siguiendo el mouse, con un leve zoom
-  var hero = $(".hero"), photo = $("#heroVisual");
-  if (hero && photo && !reduceMotion) {
-    var tx = 0.3, ty = 0.55, cx = 0.3, cy = 0.55, raf = 0;
-    function tick() {
-      cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
-      photo.style.transform = "translate(" + ((cx - 0.5) * -12).toFixed(1) + "px," + ((cy - 0.5) * -8).toFixed(1) + "px) scale(" + (1 + Math.max(0, 0.5 - Math.hypot(cx - 0.3, cy - 0.5)) * 0.08).toFixed(3) + ")";
-      raf = (Math.abs(tx - cx) + Math.abs(ty - cy) > 0.001) ? requestAnimationFrame(tick) : 0;
-    }
-    hero.addEventListener("pointermove", function (e) {
-      var r = hero.getBoundingClientRect();
-      tx = (e.clientX - r.left) / r.width; ty = (e.clientY - r.top) / r.height;
-      if (!raf) raf = requestAnimationFrame(tick);
-    });
-    hero.addEventListener("pointerleave", function () {
-      tx = 0.3; ty = 0.55;
-      if (!raf) raf = requestAnimationFrame(tick);
-    });
-  }
 
   // Glitch en el nombre: una vez cuando termina de subir, y al pasar el mouse o tocarlo
   var heroName = $("#heroName");
