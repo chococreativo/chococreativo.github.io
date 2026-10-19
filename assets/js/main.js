@@ -29,7 +29,8 @@
   }
 
   // El nombre empieza a subir con el texto de index.html, sin esperar a que cargue el panel
-  splitName(nameFromHTML(), true);
+  // riseEnd: milisegundos hasta que termina de subir la última letra
+  var riseEnd = splitName(nameFromHTML(), true);
 
   Promise.all([getJSON("content/sitio.json"), getJSON("content/proyectos.json")])
     .then(function (res) { render(res[0], (res[1] && res[1].proyectos) || []); })
@@ -119,6 +120,7 @@
       });
       h.appendChild(ln);
     });
+    return (0.15 + (idx - 1) * 0.035 + 0.8) * 1000;
   }
 
   // Trabajos con filtros por categoría
@@ -268,7 +270,7 @@
     });
   }
 
-  // Glitch en el nombre: cada pocos segundos y al pasar el mouse
+  // Glitch en el nombre: una vez cuando termina de subir, y al pasar el mouse o tocarlo
   var heroName = $("#heroName");
   function glitch() {
     if (!heroName || heroName.classList.contains("glitch")) return;
@@ -276,8 +278,9 @@
     setTimeout(function () { heroName.classList.remove("glitch"); }, 600);
   }
   if (heroName && !reduceMotion) {
-    setTimeout(function loop() { glitch(); setTimeout(loop, 3500 + Math.random() * 3500); }, 2200);
+    setTimeout(glitch, riseEnd + 150);
     heroName.addEventListener("pointerenter", glitch);
+    heroName.addEventListener("pointerdown", function (e) { if (e.pointerType !== "mouse") glitch(); });
   }
 
   // Menú en celular
