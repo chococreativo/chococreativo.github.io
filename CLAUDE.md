@@ -1,6 +1,7 @@
 # CLAUDE.md
 
 @/mnt/project-files/blueprint.md
+@../../blueprint.md
 
 ## Blueprint del proyecto
 - El blueprint de arriba es `/mnt/project-files/blueprint.md`, en la carpeta compartida del proyecto. Léelo antes de proponer o tocar nada.
@@ -15,7 +16,7 @@
 - Cada vez que lo reescribas, actualiza la línea `Actualizado` con la fecha y la hora de Barranquilla (America/Bogota).
 
 ## Cómo se llena
-- Los seis encabezados van exactos y en el mismo orden. No agregues secciones.
+- Los siete encabezados van exactos y en el mismo orden. No agregues secciones.
 - Solo lo que se puede ver en el proyecto. Si algo no se sabe, va vacío: un hueco es mejor que una suposición.
 - Sección 2: un estado ("el login ya corre, falta el correo de confirmación"), no el relato de cómo se llegó ahí.
 - Sección 3: una línea por archivo, con la ruta y para qué sirve. Sin código.
